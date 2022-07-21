@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Match : MonoBehaviour
 {
-    public ArrayLayout boardLayout;
+    public ArrayLayout boardLayout; /// verificar si se puede cambiar por json o txt
 
     [Header("UI Elements")]
     public RectTransform gameBoard;
@@ -72,8 +72,10 @@ public class Match : MonoBehaviour
                 if (val <= 0) continue;
 
                 GameObject p = Instantiate(nodePieces, gameBoard);
+                NodePiece node = p.GetComponent<NodePiece>();
                 RectTransform rect = p.GetComponent<RectTransform>();
                 rect.anchoredPosition = new Vector2(0 + (64 * x), 0 - (64 * y));
+                node.Initialize(val, new Point(x,y), pieces[val-1]);
             }
         }
     }
@@ -171,7 +173,8 @@ public class Match : MonoBehaviour
 
     private int fillPiece() {
         int val = 1;
-        val = (random.Next(0, 100) / (100 / pieces.Length)) + 1;
+        //val = (random.Next(0, 100) / (100 / pieces.Length)) + 1;
+        val = Random.Range(1, pieces.Length);
         return val;
     }
 
