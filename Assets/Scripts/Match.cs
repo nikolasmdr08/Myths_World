@@ -217,6 +217,11 @@ public class Match : MonoBehaviour
         }
         return seed;
     }
+
+    public Vector2 getPositionFromPoint(Point p)
+    {
+        return new Vector2(0 + (64 * p.x), -0 - (64 * p.y));
+    }
 }
 
 [System.Serializable]
