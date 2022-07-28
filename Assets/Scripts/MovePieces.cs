@@ -54,7 +54,7 @@ public class MovePieces : MonoBehaviour
     public void DropPiece()
     {
         if (moving == null) return;
-
+        game.ResetPiece(moving);
         moving = null;
     }
 }
