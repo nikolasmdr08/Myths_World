@@ -18,34 +18,70 @@ public class Match : MonoBehaviour
     Node[,] board;
 
     List<NodePiece> update;
+    List<FlippedPiece> flipped;
     System.Random random;
 
-    void Start()
-    {
+    void Start() {
         StartGame();
     }
 
-    private void Update()
-    {
+    private void Update() {
         List<NodePiece> finishUpdating = new List<NodePiece>();
-        for(int i = 0; i< update.Count; i++)
-        {
+        for (int i = 0; i < update.Count; i++) {
             NodePiece piece = update[i];
             if (!piece.UpdatePiece()) finishUpdating.Add(piece);
         }
-        for(int i=0; i< finishUpdating.Count; i++)
-        {
-            NodePiece piece = update[i];
+        for (int i = 0; i < finishUpdating.Count; i++) {
+            NodePiece piece = finishUpdating[i];
+            FlippedPiece flip = getFlipped(piece);
+            NodePiece flippedPiece = null;
+
+            List<Point> connected = isConnected(piece.index, true);
+            bool wasFlipped = (flip != null);
+
+            if (wasFlipped) {
+                flippedPiece = flip.getOtherPiece(piece);
+                AddPoints(ref connected, isConnected(flippedPiece.index, true));
+            }
+                
+            if (connected.Count == 0) {
+                if (wasFlipped) {
+                    FlipPieces(piece.index, flippedPiece.index, false);
+                }
+            }
+            else {
+                foreach (Point pnt in connected) {
+                    Node node = getNodeAtPoint(pnt);
+                    NodePiece nodePiece = node.getPiece();
+                    if (nodePiece != null) {
+                        nodePiece.gameObject.SetActive(false);
+                    }
+                    node.SetPiece(null);
+                }
+            }
+            flipped.Remove(flip);
             update.Remove(piece);
         }
     }
+
+    FlippedPiece getFlipped(NodePiece p) {
+        FlippedPiece flip = null;
+        for (int i = 0; i < flipped.Count; i++) {
+            if (flipped[i].getOtherPiece(p) != null) {
+                flip = flipped[i];
+                break;
+            }
+        }
+        return flip;
+    }
+
 
     void StartGame() {
 
         string seed = getRandomSeed();
         random = new System.Random(seed.GetHashCode());
         update = new List<NodePiece>();
-
+        flipped = new List<FlippedPiece>();
         initializeBoard();
         VerifyBoard();
         InstantiateBoard();
@@ -64,14 +100,34 @@ public class Match : MonoBehaviour
     public void ResetPiece(NodePiece piece)
     {
         piece.ResetPosition();
-        piece.flipped = null;
         update.Add(piece);
     }
 
-    public void FlipPieces(Point one, Point two)
+    public void FlipPieces(Point one, Point two, bool main)
     {
+        if (getValueAtPoint(one) < 0) return;
+
         Node nodeOne = getNodeAtPoint(one);
         NodePiece pieceOne = nodeOne.getPiece();
+
+        if (getValueAtPoint(two) > 0) {
+            Node nodeTwo = getNodeAtPoint(two);
+            NodePiece pieceTwo = nodeTwo.getPiece();
+
+            nodeOne.SetPiece(pieceTwo);
+            nodeTwo.SetPiece(pieceOne);
+
+            //pieceOne.flipped = pieceTwo;
+            //pieceTwo.flipped = pieceOne;
+            if(main)
+                flipped.Add(new FlippedPiece(pieceOne,pieceTwo));
+
+            update.Add(pieceOne);
+            update.Add(pieceTwo);
+        }
+        else {
+            ResetPiece(pieceOne);
+        }
     }
     void VerifyBoard() {
         List<int> remove;
@@ -276,5 +332,29 @@ public class Node
     public NodePiece getPiece()
     {
         return piece;
+    }
+}
+
+[System.Serializable] 
+public class FlippedPiece
+{
+    public NodePiece one;
+    public NodePiece two;
+
+    public FlippedPiece(NodePiece o, NodePiece t) {
+        one = o;
+        two = t;
+    }
+
+    public NodePiece getOtherPiece(NodePiece p) {
+        if (p == one) {
+            return two;
+        }
+        else if(p == two) {
+            return one;
+        }
+        else {
+            return null;
+        }
     }
 }
