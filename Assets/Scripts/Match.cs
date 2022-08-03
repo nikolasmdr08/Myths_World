@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -117,8 +116,6 @@ public class Match : MonoBehaviour
             nodeOne.SetPiece(pieceTwo);
             nodeTwo.SetPiece(pieceOne);
 
-            //pieceOne.flipped = pieceTwo;
-            //pieceTwo.flipped = pieceOne;
             if(main)
                 flipped.Add(new FlippedPiece(pieceOne,pieceTwo));
 
@@ -248,7 +245,7 @@ public class Match : MonoBehaviour
     void AddPoints( ref List<Point> points, List<Point> add) {
         foreach(Point p in add) {
             bool doAdd = true;
-            for (int i = 0; i < add.Count; i++) {
+            for (int i = 0; i < points.Count; i++) {
                 if (add[i].Equals(p)) {
                     doAdd = false;
                     break;
