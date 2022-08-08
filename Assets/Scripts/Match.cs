@@ -18,6 +18,8 @@ public class Match : MonoBehaviour
 
     List<NodePiece> update;
     List<FlippedPiece> flipped;
+    List<NodePiece> dead;
+
     System.Random random;
 
     void Start() {
@@ -54,12 +56,68 @@ public class Match : MonoBehaviour
                     NodePiece nodePiece = node.getPiece();
                     if (nodePiece != null) {
                         nodePiece.gameObject.SetActive(false);
+                        dead.Add(nodePiece);
                     }
                     node.SetPiece(null);
                 }
+                ApplyGravityToBoard();
             }
             flipped.Remove(flip);
             update.Remove(piece);
+        }
+    }
+
+    void ApplyGravityToBoard() {
+        for (int x = 0; x < width; x++) {
+            for (int y = (height-1); y >= 0; y--) {
+                Point p = new Point(x, y);
+                Node node = getNodeAtPoint(p);
+                int val = getValueAtPoint(p);
+                if (val != 0) continue;
+                for (int ny = (y-1); ny >= -1; ny--) {
+                    Point next = new Point(x, ny);
+                    int nextVal = getValueAtPoint(next);
+                    if (nextVal == 0) continue;
+                    if(nextVal != -1) {
+                        Node got = getNodeAtPoint(next);
+                        NodePiece piece = got.getPiece();
+
+                        //set hole
+                        node.SetPiece(piece);
+                        update.Add(piece);
+
+                        //replace the hole
+                        got.SetPiece(null);
+                    }
+                    else {
+                        int newVal = fillPiece();
+                        NodePiece piece;
+                        Point fallPnt = new Point(x, -1);
+
+                        if(dead.Count > 0) {
+                            NodePiece revived = dead[0];
+                            revived.gameObject.SetActive(true);
+                            revived.rect.anchoredPosition = getPositionFromPoint(fallPnt);
+                            piece = revived;
+
+                            dead.RemoveAt(0);
+                        }
+                        else {
+                            GameObject obj = Instantiate(nodePieces, gameBoard);
+                            NodePiece n = obj.GetComponent<NodePiece>();
+                            RectTransform rect = obj.GetComponent<RectTransform>();
+                            piece = n;
+                        }
+
+                        piece.Initialize(newVal, p, pieces[newVal - 1]);
+
+                        Node hole = getNodeAtPoint(p);
+                        hole.SetPiece(piece);
+                        ResetPiece(piece);
+                    }
+                    break;
+                }
+            }
         }
     }
 
@@ -81,6 +139,7 @@ public class Match : MonoBehaviour
         random = new System.Random(seed.GetHashCode());
         update = new List<NodePiece>();
         flipped = new List<FlippedPiece>();
+        dead = new List<NodePiece>();
         initializeBoard();
         VerifyBoard();
         InstantiateBoard();
