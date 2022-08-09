@@ -7,18 +7,22 @@ public class Match : MonoBehaviour
 
     [Header("UI Elements")]
     public RectTransform gameBoard;
+    public RectTransform killedBoard;
     public Sprite[] pieces;
 
     [Header("Prefabs")]
     public GameObject nodePieces;
+    public GameObject killedPieces;
 
     int width = 9;
     int height = 11;
     Node[,] board;
+    int[] fills;
 
     List<NodePiece> update;
     List<FlippedPiece> flipped;
     List<NodePiece> dead;
+    List<KillPieces> killed;
 
     System.Random random;
 
@@ -37,6 +41,9 @@ public class Match : MonoBehaviour
             FlippedPiece flip = getFlipped(piece);
             NodePiece flippedPiece = null;
 
+            int x = (int)piece.index.x;
+            fills[x] = Mathf.Clamp(fills[x] - 1, 0, width);
+
             List<Point> connected = isConnected(piece.index, true);
             bool wasFlipped = (flip != null);
 
@@ -52,6 +59,7 @@ public class Match : MonoBehaviour
             }
             else {
                 foreach (Point pnt in connected) {
+                    KillPiece(pnt);
                     Node node = getNodeAtPoint(pnt);
                     NodePiece nodePiece = node.getPiece();
                     if (nodePiece != null) {
@@ -92,7 +100,7 @@ public class Match : MonoBehaviour
                     else {
                         int newVal = fillPiece();
                         NodePiece piece;
-                        Point fallPnt = new Point(x, -1);
+                        Point fallPnt = new Point(x, (-1 - fills[x]));
 
                         if(dead.Count > 0) {
                             NodePiece revived = dead[0];
@@ -114,6 +122,7 @@ public class Match : MonoBehaviour
                         Node hole = getNodeAtPoint(p);
                         hole.SetPiece(piece);
                         ResetPiece(piece);
+                        fills[x]++;
                     }
                     break;
                 }
@@ -134,12 +143,14 @@ public class Match : MonoBehaviour
 
 
     void StartGame() {
-
+        fills = new int[width];
         string seed = getRandomSeed();
         random = new System.Random(seed.GetHashCode());
         update = new List<NodePiece>();
         flipped = new List<FlippedPiece>();
         dead = new List<NodePiece>();
+        killed = new List<KillPieces>();
+
         initializeBoard();
         VerifyBoard();
         InstantiateBoard();
@@ -185,6 +196,29 @@ public class Match : MonoBehaviour
             ResetPiece(pieceOne);
         }
     }
+
+    void KillPiece(Point p) {
+        List<KillPieces> available = new List<KillPieces>();
+        for (int i = 0; i < killed.Count; i++) {
+            if (!killed[i].falling) available.Add(killed[i]);
+        }
+
+        KillPieces set = null;
+        if (available.Count > 0) {
+            set = available[0];
+        }
+        else {
+            GameObject kill = GameObject.Instantiate(killedPieces, killedBoard);
+            KillPieces kPiece = kill.GetComponent<KillPieces>();
+            set = kPiece;
+            killed.Add(kPiece);
+        }
+
+        int val = getValueAtPoint(p) - 1;
+        if (set != null && val >= 0 && val < pieces.Length)
+            set.Initialize(pieces[val], getPositionFromPoint(p));
+    }
+
     void VerifyBoard() {
         List<int> remove;
         for (int x  = 0; x < width; x++) {
