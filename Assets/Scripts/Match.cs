@@ -270,6 +270,10 @@ public class Match : MonoBehaviour
             for (int i = 1; i < 3; i++) {
                 Point check = Point.add(p, Point.mult(dir, i));
                 if (getValueAtPoint(check) == val) {
+                    Point puntoCto = Point.add(p, Point.mult(dir, (-1*i)));
+                    if(getValueAtPoint(puntoCto) == val) {
+                        line.Add(puntoCto);
+                    }
                     line.Add(check);
                     same++;
                 }
@@ -279,7 +283,7 @@ public class Match : MonoBehaviour
                 AddPoints(ref connected, line); // agreco los puntos conectados a la lista
             }
         }
-
+        
         for (int i = 0; i < 2; i++) { // chequeo si hay un match entre dos píezas distintas
             List<Point> line = new List<Point>();
             int same = 0;
@@ -294,7 +298,7 @@ public class Match : MonoBehaviour
                 AddPoints(ref connected, line);
             }
         }
-
+        
         for (int i = 0; i < 4; i++) {
             List<Point> square = new List<Point>();
 
@@ -327,11 +331,11 @@ public class Match : MonoBehaviour
                 AddPoints(ref connected, isConnected(connected[i], false));
             }
         }
-
+        
         if (connected.Count > 0) {
             connected.Add(p);
         }
-
+        
         return connected;
     }
 
@@ -350,7 +354,6 @@ public class Match : MonoBehaviour
 
     private int fillPiece() {
         int val = 1;
-        //val = (random.Next(0, 100) / (100 / pieces.Length)) + 1;
         val = Random.Range(1, pieces.Length);
         return val;
     }

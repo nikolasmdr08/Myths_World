@@ -47,6 +47,10 @@ public class Point
         return new Point(p.x + o.x, p.y + o.y);
     }
 
+    public static Point subs(Point p, Point o) {
+        return new Point(p.x - o.x, p.y - o.y);
+    }
+
     public static Point clone( Point p) {
         return new Point(p.x, p.y);
     }
