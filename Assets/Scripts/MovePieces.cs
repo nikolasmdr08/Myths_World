@@ -47,16 +47,19 @@ public class MovePieces : MonoBehaviour
     }
     public void MovePiece(NodePiece piece)
     {
-        if(moving !=null) return;
+        if(moving != null) return;
         moving = piece;
         mouseStart = Input.mousePosition;
+        
+        
     }
     public void DropPiece() 
     {
         if (moving == null) return;
 
-        if (!newIndex.Equals(moving.index)) {
+        if (!newIndex.Equals(moving.index) && Match.estado == "idle") {
             game.FlipPieces(moving.index, newIndex,true);
+            Match.estado = "atacando";
         }
         else {
             game.ResetPiece(moving);

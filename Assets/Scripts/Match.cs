@@ -24,6 +24,8 @@ public class Match : MonoBehaviour
     List<NodePiece> dead;
     List<KillPieces> killed;
 
+    public static string estado = "idle";
+
     System.Random random;
 
     void Start() {
@@ -32,6 +34,7 @@ public class Match : MonoBehaviour
 
     private void Update() {
         List<NodePiece> finishUpdating = new List<NodePiece>();
+
         for (int i = 0; i < update.Count; i++) {
             NodePiece piece = update[i];
             if (!piece.UpdatePiece()) finishUpdating.Add(piece);
@@ -73,6 +76,7 @@ public class Match : MonoBehaviour
             flipped.Remove(flip);
             update.Remove(piece);
         }
+        
     }
 
     void ApplyGravityToBoard() {
@@ -199,10 +203,6 @@ public class Match : MonoBehaviour
 
     void KillPiece(Point p) {
         List<KillPieces> available = new List<KillPieces>();
-        for (int i = 0; i < killed.Count; i++) {
-            if (!killed[i].falling) available.Add(killed[i]);
-        }
-
         KillPieces set = null;
         if (available.Count > 0) {
             set = available[0];
@@ -216,7 +216,7 @@ public class Match : MonoBehaviour
 
         int val = getValueAtPoint(p) - 1;
         if (set != null && val >= 0 && val < pieces.Length)
-            set.Initialize(pieces[val], getPositionFromPoint(p));
+            set.Initialize(pieces[val], getPositionFromPoint(p), val);
     }
 
     void VerifyBoard() {
@@ -401,6 +401,7 @@ public class Match : MonoBehaviour
     {
         return new Vector2(0 + (64 * p.x), -0 - (64 * p.y));
     }
+
 }
 
 [System.Serializable]

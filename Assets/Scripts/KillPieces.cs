@@ -5,39 +5,32 @@ using UnityEngine.UI;
 
 public class KillPieces : MonoBehaviour
 {
-    public bool falling;
-
-    float speed = 16f;
-    float gravity = 32f;
-    Vector2 moveDir;
+    float speed = 5f;
     RectTransform rect;
     Image img;
+    public int piece;
+
+    public Vector3 target;
+
+
 
     // Start is called before the first frame update
-    public void Initialize(Sprite piece, Vector2 start)
+    public void Initialize(Sprite sprite, Vector2 start, int val)
     {
-        falling = true;
-        moveDir = Vector2.up;
-        moveDir.x = Random.Range(-1.0f, 1.0f);
-        moveDir *= speed / 2;
-
         img = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
-        img.sprite = piece;
+        img.sprite = sprite;
         rect.anchoredPosition = start;
+        piece = val;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!falling) return;
-        moveDir.y -= Time.deltaTime * gravity;
-        moveDir.x = Mathf.Lerp(moveDir.x, 0, Time.deltaTime);
-        rect.anchoredPosition += moveDir * Time.deltaTime * speed;
-        if (rect.position.x < -128f || rect.position.x > Screen.width + 128f ||
-            rect.position.y < -128f || rect.position.y > Screen.height + 128f) {
-            falling = false;
-        }
-            
+        transform.position = Vector3.MoveTowards(transform.position, target, speed);
+    }
+
+    public int ValuePiece() {
+        return this.piece; 
     }
 }

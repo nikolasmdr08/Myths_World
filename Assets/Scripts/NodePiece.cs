@@ -68,7 +68,6 @@ public class NodePiece : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     }
     void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("Let go" + transform.name);
         MovePieces.instance.DropPiece();
     }
 
@@ -76,6 +75,6 @@ public class NodePiece : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     {
         if (updating) return;
         MovePieces.instance.MovePiece(this);
-        Debug.Log("Grab" + transform.name);
+        
     }
 }
