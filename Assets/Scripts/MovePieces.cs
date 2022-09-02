@@ -55,7 +55,10 @@ public class MovePieces : MonoBehaviour
     }
     public void DropPiece() 
     {
-        if (moving == null) return;
+        if (moving == null) {
+            Match.estado = "idle";
+            return;
+        }
 
         if (!newIndex.Equals(moving.index) && Match.estado == "idle") {
             game.FlipPieces(moving.index, newIndex,true);
@@ -63,6 +66,7 @@ public class MovePieces : MonoBehaviour
         }
         else {
             game.ResetPiece(moving);
+            Match.estado = "idle";
         }
         
         moving = null;

@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class Atack : MonoBehaviour
 {
-    //Match game;
     public int hitPoints;
+    public int valuePiece;
 
     // Start is called before the first frame update
     void Start()
     {
-        //game = GetComponent<Match>();
     }
 
     // Update is called once per frame
@@ -31,7 +30,7 @@ public class Atack : MonoBehaviour
         //consultar stats
         GameObject[] array = GameObject.FindGameObjectsWithTag("KillPiece");
         if (array.Length <= 1) {
-            //Match.estado = "idle";
+            Match.estado = "idle";
             Debug.Log("Cambio");
         }
             
