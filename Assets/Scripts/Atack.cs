@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Atack : MonoBehaviour
 {
-    public int hitPoints;
-    public int valuePiece;
+    public static int hitPoints;
+    public static int valuePiece;
+    public GameObject bullet;
 
     // Start is called before the first frame update
     void Start()
@@ -16,8 +17,9 @@ public class Atack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+     
     }
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("KillPiece")) {
             SumarHitPoints(); //pasr tipo de ataque aqui
@@ -26,12 +28,12 @@ public class Atack : MonoBehaviour
     }
 
     private void SumarHitPoints() {
-        this.hitPoints += 1;
+        hitPoints += 1;
         //consultar stats
         GameObject[] array = GameObject.FindGameObjectsWithTag("KillPiece");
         if (array.Length <= 1) {
-            Match.estado = "idle";
-            Debug.Log("Cambio");
+            bullet.transform.position = transform.position;
+            bullet.SetActive(true);
         }
             
 

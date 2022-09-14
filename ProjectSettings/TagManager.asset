@@ -6,6 +6,7 @@ TagManager:
   tags:
   - KillPiece
   - AttackPoint
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -33,6 +33,7 @@ public class Match : MonoBehaviour
     }
 
     private void Update() {
+
         List<NodePiece> finishUpdating = new List<NodePiece>();
 
         for (int i = 0; i < update.Count; i++) {

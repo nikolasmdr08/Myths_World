@@ -9,7 +9,6 @@ public class KillPieces : MonoBehaviour
     RectTransform rect;
     Image img;
     public int piece;
-
     public Vector3 target;
 
 

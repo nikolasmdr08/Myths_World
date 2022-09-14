@@ -56,17 +56,17 @@ public class MovePieces : MonoBehaviour
     public void DropPiece() 
     {
         if (moving == null) {
-            Match.estado = "idle";
+            //Match.estado = "idle";
             return;
         }
 
-        if (!newIndex.Equals(moving.index) && Match.estado == "idle") {
+        if (!newIndex.Equals(moving.index)) { //&& Match.estado == "idle"
             game.FlipPieces(moving.index, newIndex,true);
-            Match.estado = "atacando";
+            //Match.estado = "nextToAtack";
         }
         else {
             game.ResetPiece(moving);
-            Match.estado = "idle";
+            //Match.estado = "idle";
         }
         
         moving = null;
