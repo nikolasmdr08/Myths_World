@@ -33,51 +33,52 @@ public class Match : MonoBehaviour
     }
 
     private void Update() {
+        Debug.Log(estado);
+        if (estado == "idle") {
+            List<NodePiece> finishUpdating = new List<NodePiece>();
 
-        List<NodePiece> finishUpdating = new List<NodePiece>();
-
-        for (int i = 0; i < update.Count; i++) {
-            NodePiece piece = update[i];
-            if (!piece.UpdatePiece()) finishUpdating.Add(piece);
-        }
-        for (int i = 0; i < finishUpdating.Count; i++) {
-            NodePiece piece = finishUpdating[i];
-            FlippedPiece flip = getFlipped(piece);
-            NodePiece flippedPiece = null;
-
-            int x = (int)piece.index.x;
-            fills[x] = Mathf.Clamp(fills[x] - 1, 0, width);
-
-            List<Point> connected = isConnected(piece.index, true);
-            bool wasFlipped = (flip != null);
-
-            if (wasFlipped) {
-                flippedPiece = flip.getOtherPiece(piece);
-                AddPoints(ref connected, isConnected(flippedPiece.index, true));
+            for (int i = 0; i < update.Count; i++) {
+                NodePiece piece = update[i];
+                if (!piece.UpdatePiece()) finishUpdating.Add(piece);
             }
-                
-            if (connected.Count == 0) {
+            for (int i = 0; i < finishUpdating.Count; i++) {
+                NodePiece piece = finishUpdating[i];
+                FlippedPiece flip = getFlipped(piece);
+                NodePiece flippedPiece = null;
+
+                int x = (int)piece.index.x;
+                fills[x] = Mathf.Clamp(fills[x] - 1, 0, width);
+
+                List<Point> connected = isConnected(piece.index, true);
+                bool wasFlipped = (flip != null);
+
                 if (wasFlipped) {
-                    FlipPieces(piece.index, flippedPiece.index, false);
+                    flippedPiece = flip.getOtherPiece(piece);
+                    AddPoints(ref connected, isConnected(flippedPiece.index, true));
                 }
-            }
-            else {
-                foreach (Point pnt in connected) {
-                    KillPiece(pnt);
-                    Node node = getNodeAtPoint(pnt);
-                    NodePiece nodePiece = node.getPiece();
-                    if (nodePiece != null) {
-                        nodePiece.gameObject.SetActive(false);
-                        dead.Add(nodePiece);
+
+                if (connected.Count == 0) {
+                    if (wasFlipped) {
+                        FlipPieces(piece.index, flippedPiece.index, false);
                     }
-                    node.SetPiece(null);
                 }
-                ApplyGravityToBoard();
+                else {
+                    foreach (Point pnt in connected) {
+                        KillPiece(pnt);
+                        Node node = getNodeAtPoint(pnt);
+                        NodePiece nodePiece = node.getPiece();
+                        if (nodePiece != null) {
+                            nodePiece.gameObject.SetActive(false);
+                            dead.Add(nodePiece);
+                        }
+                        node.SetPiece(null);
+                    }
+                    ApplyGravityToBoard();
+                }
+                flipped.Remove(flip);
+                update.Remove(piece);
             }
-            flipped.Remove(flip);
-            update.Remove(piece);
         }
-        
     }
 
     void ApplyGravityToBoard() {

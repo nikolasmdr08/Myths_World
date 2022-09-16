@@ -68,13 +68,15 @@ public class NodePiece : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     }
     void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
     {
-        MovePieces.instance.DropPiece();
+        if (Match.estado == "idle") MovePieces.instance.DropPiece();
     }
 
     void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
     {
-        if (updating) return;
-        MovePieces.instance.MovePiece(this);
+        if (Match.estado == "idle") {
+            if (updating) return;
+            MovePieces.instance.MovePiece(this);
+        }
         
     }
 }

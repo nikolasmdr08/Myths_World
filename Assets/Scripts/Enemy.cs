@@ -26,16 +26,15 @@ public class Enemy : MonoBehaviour
         barLifeEnemy.value = health;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log("Choco bala");
+    public void OnCollisionEnter2D(Collision2D collision) {
+        Debug.Log("Choco bala enter");
         if(collision.transform.tag == "Bullet") {
             currentHealth += Atack.hitPoints;
             Atack.hitPoints = 0;
             SetHealth(currentHealth);
             collision.gameObject.SetActive(false);
+            Match.estado = "Turno Enemigo";
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision) {
-        Debug.Log("Choco bala");
-    }
+
 }

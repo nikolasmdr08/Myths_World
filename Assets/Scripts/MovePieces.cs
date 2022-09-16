@@ -60,7 +60,7 @@ public class MovePieces : MonoBehaviour
             return;
         }
 
-        if (!newIndex.Equals(moving.index)) { //&& Match.estado == "idle"
+        if (!newIndex.Equals(moving.index)){
             game.FlipPieces(moving.index, newIndex,true);
             //Match.estado = "nextToAtack";
         }

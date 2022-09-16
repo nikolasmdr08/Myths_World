@@ -14,13 +14,13 @@ GameObject:
   - component: {fileID: 549995703149408972}
   - component: {fileID: 1887546705988503145}
   - component: {fileID: 2047657849609100397}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: shoot
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &675048714938047149
 RectTransform:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.07516289, y: -0.07513809}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -102,7 +102,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 16.788174, y: 16.938515}
   m_EdgeRadius: 0
 --- !u!50 &1887546705988503145
 Rigidbody2D:

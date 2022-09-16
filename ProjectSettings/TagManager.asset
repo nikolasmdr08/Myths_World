@@ -7,11 +7,12 @@ TagManager:
   - KillPiece
   - AttackPoint
   - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Collitions
   - Water
   - UI
   - 
