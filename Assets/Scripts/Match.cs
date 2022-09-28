@@ -33,7 +33,7 @@ public class Match : MonoBehaviour
     }
 
     private void Update() {
-        Debug.Log(estado);
+        //Debug.Log(estado);
         if (estado == "idle") {
             List<NodePiece> finishUpdating = new List<NodePiece>();
 
