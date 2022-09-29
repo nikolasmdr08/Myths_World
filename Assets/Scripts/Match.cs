@@ -28,10 +28,17 @@ public class Match : MonoBehaviour
 
     System.Random random;
 
+    public GameObject turnoP;
+
     void Start() {
         StartGame();
+        turnoP.SetActive(true);
+        Invoke("cambioTurno", 2f);
     }
-
+    void cambioTurno() {
+        turnoP.SetActive(false);
+        Match.estado = "idle";
+    }
     private void Update() {
         //Debug.Log(estado);
         if (estado == "idle") {

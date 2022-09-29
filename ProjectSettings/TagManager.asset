@@ -8,6 +8,10 @@ TagManager:
   - AttackPoint
   - Bullet
   - Enemy
+  - EnemyBullet
+  - BulletBasic
+  - BulletSpecial
+  - BulletSuper
   layers:
   - Default
   - TransparentFX
