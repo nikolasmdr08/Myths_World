@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision) {
         if(collision.transform.tag == "Bullet") {
-            currentHealth += Atack.hitPoints;
+            currentHealth += Atack.hitPoints; /// *= stat
             Atack.hitPoints = 0;
             SetHealth(currentHealth);
             collision.gameObject.SetActive(false);
