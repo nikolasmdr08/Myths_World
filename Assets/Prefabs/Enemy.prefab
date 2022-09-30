@@ -92,6 +92,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barLifeEnemy: {fileID: 0}
   maxHealth: 100
+  bullets:
+  - {fileID: 7667492572028301238, guid: e7d800a1bbd61c9468d9e10cd6b7e0d4, type: 3}
+  - {fileID: 7139565771153540770, guid: dbdc025deaadd9042a360081cf32dcd3, type: 3}
+  - {fileID: 9111239607460265650, guid: 6b08598c047a470439ee3b8f82280678, type: 3}
+  turnoE: {fileID: 0}
+  turnoP: {fileID: 0}
 --- !u!61 &725042035274357597
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
 
     private void Update() {
         if(Match.estado == "Turno Enemigo") {
-            System.Threading.Thread.Sleep(2000);
+            //System.Threading.Thread.Sleep(2000);
             definirAtaque();
             Match.estado = "Turno Enemigo Atacando";
         }

@@ -1930,22 +1930,6 @@ PrefabInstance:
       propertyPath: barLifeEnemy
       value: 
       objectReference: {fileID: 424112271}
-    - target: {fileID: 288595470, guid: 17712c90b21157140bc53a85a7a6ab50, type: 3}
-      propertyPath: bullets.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 288595470, guid: 17712c90b21157140bc53a85a7a6ab50, type: 3}
-      propertyPath: bullets.Array.data[0]
-      value: 
-      objectReference: {fileID: 7667492572028301238, guid: e7d800a1bbd61c9468d9e10cd6b7e0d4, type: 3}
-    - target: {fileID: 288595470, guid: 17712c90b21157140bc53a85a7a6ab50, type: 3}
-      propertyPath: bullets.Array.data[1]
-      value: 
-      objectReference: {fileID: 7139565771153540770, guid: dbdc025deaadd9042a360081cf32dcd3, type: 3}
-    - target: {fileID: 288595470, guid: 17712c90b21157140bc53a85a7a6ab50, type: 3}
-      propertyPath: bullets.Array.data[2]
-      value: 
-      objectReference: {fileID: 9111239607460265650, guid: 6b08598c047a470439ee3b8f82280678, type: 3}
     - target: {fileID: 6291032123933257718, guid: 17712c90b21157140bc53a85a7a6ab50, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2033,10 +2017,6 @@ PrefabInstance:
     - target: {fileID: 6291032123933257719, guid: 17712c90b21157140bc53a85a7a6ab50, type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 6291032123933257719, guid: 17712c90b21157140bc53a85a7a6ab50, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17712c90b21157140bc53a85a7a6ab50, type: 3}
