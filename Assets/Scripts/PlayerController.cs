@@ -13,12 +13,16 @@ public class PlayerController : MonoBehaviour
 
     public GameObject turnoE;
     public GameObject turnoP;
+    public GameObject Lose;
+    public Text textLife;
+
 
     void Awake() {
         SetMaxHealth(maxHealth);
     }
     private void Start() {
         currentHealth = 0;
+        textLife.text = maxHealth - currentHealth + " / " + maxHealth;
     }
 
     public void SetMaxHealth(int health) {
@@ -28,12 +32,17 @@ public class PlayerController : MonoBehaviour
 
     public void SetHealth(int health) {
         barLifePlayer.value = health;
+        textLife.text = maxHealth - currentHealth + " / " +maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (maxHealth <= currentHealth && Match.estado != "Terminado") {
+            Lose.SetActive(true);
+            Match.estado = "Terminado";
+            Debug.Log("Player life: " + currentHealth + "/" + maxHealth);
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision) {

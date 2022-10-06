@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-    public GameObject target;
+    GameObject target;
     public int speed;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        target = GameObject.FindGameObjectWithTag("Enemy");
     }
 
     // Update is called once per frame

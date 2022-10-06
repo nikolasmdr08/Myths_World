@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     public GameObject[] bullets;
     public GameObject turnoE;
     public GameObject turnoP;
+    public GameObject Win;
+    public Text textLife;
 
 
     // Start is called before the first frame update
@@ -24,6 +26,7 @@ public class Enemy : MonoBehaviour
     }
     private void Start() {
         currentHealth = 0;
+        textLife.text = maxHealth - currentHealth + " / " + maxHealth;
     }
 
     public void SetMaxHealth(int health) {
@@ -33,6 +36,7 @@ public class Enemy : MonoBehaviour
 
     public void SetHealth(int health) {
         barLifeEnemy.value = health;
+        textLife.text = maxHealth - currentHealth + " / " + maxHealth;
     }
 
     public void OnCollisionEnter2D(Collision2D collision) {
@@ -67,6 +71,11 @@ public class Enemy : MonoBehaviour
             //System.Threading.Thread.Sleep(2000);
             definirAtaque();
             Match.estado = "Turno Enemigo Atacando";
+        }
+        if (maxHealth <= currentHealth && Match.estado != "Terminado") {
+            Win.SetActive(true);
+            Match.estado = "Terminado";
+            Debug.Log("Enemy life: " + currentHealth + "/" + maxHealth);
         }
     }
 

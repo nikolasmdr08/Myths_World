@@ -9,9 +9,11 @@ public class KillPieces : MonoBehaviour
     RectTransform rect;
     Image img;
     public int piece;
-    public Vector3 target;
+    GameObject target;
 
-
+    private void Start() {
+        target = GameObject.FindGameObjectWithTag("AttackPoint");
+    }
 
     // Start is called before the first frame update
     public void Initialize(Sprite sprite, Vector2 start, int val)
@@ -26,7 +28,7 @@ public class KillPieces : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, speed);
+        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed);
     }
 
     public int ValuePiece() {
