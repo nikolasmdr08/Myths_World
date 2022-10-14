@@ -1057,11 +1057,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367589089}
   m_CullTransparentMesh: 1
---- !u!1 &1435527157 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6291032123933257719, guid: 17712c90b21157140bc53a85a7a6ab50, type: 3}
-  m_PrefabInstance: {fileID: 6291032124186128893}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1507861576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1268,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fae00088666186f4b91a6a14670b8d5b, type: 3}
   - {fileID: 21300000, guid: d9c2aa79ddc846a499d105aa572c7166, type: 3}
   - {fileID: 21300000, guid: 207eca990722e7746ae18de4f5f8e49a, type: 3}
-  - {fileID: 21300000, guid: cafbbbd62379f1a44bf915e784397c20, type: 3}
   - {fileID: 21300000, guid: cafbbbd62379f1a44bf915e784397c20, type: 3}
   nodePieces: {fileID: 4369574393660147484, guid: ff34e1394588a654cb6f548095d01f30, type: 3}
   killedPieces: {fileID: 377390344506599064, guid: 08dacdaa23397114db46a57e734c53f0, type: 3}
@@ -2200,10 +2194,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2003620066}
     - target: {fileID: 288595470, guid: 17712c90b21157140bc53a85a7a6ab50, type: 3}
-      propertyPath: maxHealth
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 288595470, guid: 17712c90b21157140bc53a85a7a6ab50, type: 3}
       propertyPath: barLifeEnemy
       value: 
       objectReference: {fileID: 424112271}
@@ -2304,10 +2294,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1717786436}
     m_Modifications:
-    - target: {fileID: 232372743586800038, guid: ac430df1940730042830a7d1bee75c20, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1435527157}
     - target: {fileID: 2257200821697397155, guid: ac430df1940730042830a7d1bee75c20, type: 3}
       propertyPath: Lose
       value: 
@@ -2324,10 +2310,6 @@ PrefabInstance:
       propertyPath: textLife
       value: 
       objectReference: {fileID: 531838308}
-    - target: {fileID: 2257200821697397155, guid: ac430df1940730042830a7d1bee75c20, type: 3}
-      propertyPath: maxHealth
-      value: 300
-      objectReference: {fileID: 0}
     - target: {fileID: 2257200821697397155, guid: ac430df1940730042830a7d1bee75c20, type: 3}
       propertyPath: barLifePlayer
       value: 
@@ -2367,10 +2349,6 @@ PrefabInstance:
     - target: {fileID: 2257200821697397158, guid: ac430df1940730042830a7d1bee75c20, type: 3}
       propertyPath: m_SizeDelta.y
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2257200821697397158, guid: ac430df1940730042830a7d1bee75c20, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2257200821697397158, guid: ac430df1940730042830a7d1bee75c20, type: 3}
       propertyPath: m_LocalPosition.x

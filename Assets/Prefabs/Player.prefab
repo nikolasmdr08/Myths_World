@@ -30,7 +30,7 @@ RectTransform:
   m_GameObject: {fileID: 2257200821697397159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2257200821970553503}
   - {fileID: 1589050534054307686}
@@ -93,9 +93,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barLifePlayer: {fileID: 0}
-  maxHealth: 1000
+  maxHealth: 500
   turnoE: {fileID: 0}
   turnoP: {fileID: 0}
+  Lose: {fileID: 0}
+  textLife: {fileID: 0}
 --- !u!61 &2257200821697397149
 BoxCollider2D:
   m_ObjectHideFlags: 0

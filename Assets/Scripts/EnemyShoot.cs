@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyShoot : MonoBehaviour
 {
-    public int speed;
+    public float speed = 1f;
     GameObject target;
 
     // Start is called before the first frame update

@@ -40,8 +40,8 @@ public class Match : MonoBehaviour
         Match.estado = "idle";
     }
     private void Update() {
-        //Debug.Log(estado);
-        if (estado == "idle") {
+        Debug.Log(estado);
+        if (estado == "idle" || estado == "Atacando") {
             List<NodePiece> finishUpdating = new List<NodePiece>();
 
             for (int i = 0; i < update.Count; i++) {
@@ -211,20 +211,15 @@ public class Match : MonoBehaviour
     }
 
     void KillPiece(Point p) {
-        List<KillPieces> available = new List<KillPieces>();
-        KillPieces set = null;
-        if (available.Count > 0) {
-            set = available[0];
-        }
-        else {
-            GameObject kill = GameObject.Instantiate(killedPieces, killedBoard);
-            KillPieces kPiece = kill.GetComponent<KillPieces>();
-            set = kPiece;
-            killed.Add(kPiece);
-        }
+        //List<KillPieces> available = new List<KillPieces>();
 
-        int val = getValueAtPoint(p) - 1;
-        if (set != null && val > 0 && val < pieces.Length)
+        GameObject kill = GameObject.Instantiate(killedPieces, killedBoard);
+        KillPieces kPiece = kill.GetComponent<KillPieces>();
+        KillPieces set = kPiece;
+        killed.Add(kPiece);
+  
+        int val = getValueAtPoint(p)-1;
+        if (set != null && val >= 0 && val < pieces.Length)
             set.Initialize(pieces[val], getPositionFromPoint(p), val);
     }
 

@@ -62,11 +62,11 @@ public class MovePieces : MonoBehaviour
 
         if (!newIndex.Equals(moving.index)){
             game.FlipPieces(moving.index, newIndex,true);
-            //Match.estado = "nextToAtack";
+            Match.estado = "Atacando";
         }
         else {
             game.ResetPiece(moving);
-            //Match.estado = "idle";
+            Match.estado = "idle";
         }
         
         moving = null;

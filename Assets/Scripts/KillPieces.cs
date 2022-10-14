@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class KillPieces : MonoBehaviour
 {
-    float speed = 5f;
+    float speed = 1f;
     RectTransform rect;
     Image img;
     public int piece;
@@ -32,6 +32,6 @@ public class KillPieces : MonoBehaviour
     }
 
     public int ValuePiece() {
-        return this.piece; 
+        return piece; 
     }
 }
